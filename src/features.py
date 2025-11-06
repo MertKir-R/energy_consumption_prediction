@@ -1,5 +1,7 @@
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
+
 
 def linear_interpolation(data, col): 
     valcnt = data['country'].value_counts() 
@@ -57,3 +59,45 @@ def fill_extrapolation(df, col):
 
     return extrapolate_df
  
+def lag_feature(df, col, shift = 1):
+    lag_copy = df.copy()
+    lag_copy = lag_copy.sort_values(['country', 'year'])
+    lag_name = f'{col}_lag{shift}'
+
+    lag_copy[lag_name] = lag_copy.groupby('country')[col].shift(shift)
+
+    return lag_copy
+
+
+def avg_lag_feature(df, col, roll = 3):
+    lag_copy = df.copy()
+    lag_copy = lag_copy.sort_values(['country', 'year'])
+    lag_name = f'{col}_avg_lag{roll}'
+
+    lag_copy[lag_name] = lag_copy.groupby('country', group_keys=False)[col].shift(1).rolling(roll, min_periods = 1).mean()
+
+    return lag_copy
+
+
+def predict_plot(model, feature_set, full_data, y, X, country = "Austria"):
+
+    feature_set_copy = feature_set[feature_set[f'country_{country}'] == True]
+    y_pred = model.predict(feature_set_copy)
+
+    pred_df = pd.DataFrame({
+        "year": full_data[full_data[f'country_{country}']][X].values,
+        "y_actual": full_data[full_data[f'country_{country}']][y].values,
+        "y_pred": y_pred
+    })
+
+    plt.figure(figsize=(12, 6))
+    plt.plot(pred_df['year'], pred_df['y_actual'], marker='o', label="Actual")
+    plt.plot(pred_df['year'], pred_df['y_pred'], marker='o', label="Predicted")
+
+    plt.title(f"Actual and predicted for {country}")
+    plt.xlabel("Year")
+    plt.ylabel("Total oil consumption")
+    plt.grid(True)
+    plt.legend(fontsize=12)
+    plt.tight_layout()
+    plt.show()
