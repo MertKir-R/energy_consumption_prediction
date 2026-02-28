@@ -4,6 +4,61 @@
 
 ---
 
+## Live Demo
+This machine learning model is containerized with Docker and actively deployed via FastAPI on Hugging Face Spaces.
+You can test the API directly using the Swagger UI here:
+**Live Demo: [Test the deployed FastAPI endpoint on Hugging Face](https://mkir123-oil-prediction-eu.hf.space/docs)**
+
+To test the `/predict` endpoint, click **"Try it out"** in the UI and paste the following JSON payload:
+
+```json
+{
+  "year": 2023,
+  "population": 11697557.0,
+  "gdp_wb": 644800000000.0,
+  "energy_per_capita_lag1": 58395.824,
+  "solar_consumption_lag1": 17.653,
+  "wind_consumption_lag1": 31.043,
+  "hydro_consumption_lag1": 0.823,
+  "biofuel_consumption_lag1": 8.971,
+  "other_renewable_consumption_lag1": 14.243,
+  "nuclear_consumption_lag1": 109.409,
+  "coal_production_lag1": 0.0,
+  "gas_production_lag1": 0.0,
+  "oil_electricity_lag1": 3.22,
+  "oil_production_lag1": 0.0,
+  "oil_share_elec_lag1": 3.405,
+  "oil_share_energy_lag1": 47.159,
+  "energy_per_gdp_new_lag1": 1.14663159818561,
+  "oil_prod_per_capita_new_lag1": 0.0,
+  "oil_consumption_lag1": 320.99,
+  "oil_consumption_lag3": 307.178,
+  "oil_consumption_lag5": 383.162,
+  "gas_consumption_lag1": 145.534,
+  "gas_consumption_lag3": 169.982,
+  "gas_consumption_lag5": 168.741,
+  "coal_consumption_lag1": 31.991,
+  "coal_consumption_lag3": 27.957,
+  "coal_consumption_lag5": 35.873,
+  "gdp_wb_avg_lag3": 573943823356.5067,
+  "gdp_wb_avg_lag5": 560239345580.5859,
+  "gdp_wb_avg_lag7": 539482437427.7413,
+  "population_avg_lag3": 11609685.0,
+  "population_avg_lag5": 11557644.4,
+  "population_avg_lag7": 11498507.142857144,
+  "oil_consumption_avg_lag3": 323.05733333333336,
+  "oil_consumption_avg_lag5": 342.23699999999997,
+  "oil_consumption_avg_lag7": 345.9481428571429,
+  "gas_consumption_avg_lag3": 161.7073333333333,
+  "gas_consumption_avg_lag5": 165.5464,
+  "gas_consumption_avg_lag7": 164.81985714285716,
+  "coal_consumption_avg_lag3": 30.298333333333332,
+  "coal_consumption_avg_lag5": 32.546,
+  "coal_consumption_avg_lag7": 33.65985714285714,
+  "country": "Belgium"
+}
+
+
 ## Problem & Goal
 - **Task:** Predict **yearly oil consumption** for **each EU counrtry**.
 - **Why it matters:** Better forecasts help with planning of **energy** (specifically oil) need for EU countries .
