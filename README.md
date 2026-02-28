@@ -57,7 +57,8 @@ To test the `/predict` endpoint, click **"Try it out"** in the UI and paste the 
   "coal_consumption_avg_lag7": 33.65985714285714,
   "country": "Belgium"
 }
-
+```
+---
 
 ## Problem & Goal
 - **Task:** Predict **yearly oil consumption** for **each EU counrtry**.
